@@ -25,6 +25,7 @@ public class EndorsementServiceImpl implements EndorsementService{
         this.userRepository = userRepository;
         this.skillRepository = skillRepository;
     }
+
     @Override
     public EndorsementResponse createEndorsement(EndorsementRequestDTO endorsementRequestDTO){
         return null;

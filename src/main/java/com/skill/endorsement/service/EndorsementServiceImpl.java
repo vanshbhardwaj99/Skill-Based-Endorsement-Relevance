@@ -28,25 +28,51 @@ public class EndorsementServiceImpl implements EndorsementService{
 
     @Override
     public EndorsementResponse createEndorsement(EndorsementRequestDTO endorsementRequestDTO){
+        //return null;
+        try {
+            CompletableFuture<Optional<User>> reviewerFuture
+                    = CompletableFuture.supplyAsync(() -> userRepository.findById(endorsementRequestDTO.reviewerUserId()));
+            CompletableFuture<Optional<User>> revieweeFuture
+                    = CompletableFuture.supplyAsync(() -> userRepository.findById(endorsementRequestDTO.revieweeUserId()));
+
+            CompletableFuture<Optional<Skill>> skillFuture
+                    = CompletableFuture.supplyAsync(() -> skillRepository.findById(endorsementRequestDTO.skill()));
+
+            CompletableFuture<Void> combinedFuture
+                    = CompletableFuture.allOf(reviewerFuture, revieweeFuture, skillFuture);
+
+
+            combinedFuture.get();
+
+            Optional<User> reviewer = reviewerFuture.get();
+            Optional<User> reviewee = revieweeFuture.get();
+            Optional<Skill> skill = skillFuture.get();
+
+            userRepository.createEndorsement(reviewer.get().id(), reviewee.get().id(), skill.get().name(), endorsementRequestDTO.score(), 0.0);
+
+            return new EndorsementResponse(endorsementRequestDTO.reviewerUserId(), skill.get().name(), endorsementRequestDTO.score(), 0.0);
+
+        }
+        catch(Exception ex){
+            //Log the exception, here I am using this just for an example
+            System.out.println(" Exception inside EndorsementServiceImpl-->createEndorsement " +  ex);
+        }
+
         return null;
-//        CompletableFuture<Optional<User>> reviewer
-//                = CompletableFuture.supplyAsync(() -> userRepository.findById(endorsementRequestDTO.reviewerUserId()));
-//        CompletableFuture<Optional<User>> reviewee
-//                = CompletableFuture.supplyAsync(() -> userRepository.findById(endorsementRequestDTO.revieweeUserId()));
-//
-//        CompletableFuture<Skill> skill
-//                = CompletableFuture.supplyAsync(() -> skillRepository.);
-//
-//        CompletableFuture<Void> combinedFuture
-//                = CompletableFuture.allOf(reviewer, reviewee, skill);
-//
-//
-//        combinedFuture.get();
     }
 
 
     @Override
     public List<EndorsementResponse> getEndorsementsById(String userId){
+        try {
+            User user = userRepository.findById(userId).orElse(null);
+            return userRepository.findEndorsements(user.id());
+        }
+        catch(Exception ex){
+            //Log the exception, here I am using this just for an example
+            System.out.println(" Exception inside EndorsementServiceImpl-->getEndorsementsById " +  ex);
+        }
+
         return null;
     }
 }

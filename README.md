@@ -10,7 +10,8 @@ This project requires neo4j-graph-data-science-2.6.7.jar to be included inside p
 neo4jqueries.sql file is included in this repository at the path: src/main/resources/static/neo4jqueries.sql
 This contains a list of CQL(Cypher Query Language) as a mini sample dataset. Please execute these CQL in order to test the APIs.
 
-NOTE: The API body values have to be entered as per the 
+NOTE: The API body values have to be entered as per the ids provided in the neo4jqueries.sql file.
+
 This project mainly exposes 2 APIs:
 
 1) Post Endorsement API: Allows a reviewer to endorse a reviewee for a specific skill with a score, and returns a weighted relevance score considering the reviewee's and reviewer's profiles.

@@ -16,8 +16,8 @@ This project mainly exposes 2 APIs:
 1) Post Endorsement API: Allows a reviewer to endorse a reviewee for a specific skill with a score, and returns a weighted relevance score considering the reviewee's and reviewer's profiles.
 API Design-
 
-HTTP: POST
-URI: http://127.0.0.1:8080/endorsements
+HTTP: POST,
+URI: http://127.0.0.1:8080/endorsements,
 Body: 
 {
     "revieweeUserId": "",
@@ -46,9 +46,9 @@ Sample Response JSON:
 
 2) Get Endorsements API: Retrieves all the endorsements for a user, displaying each skill with the scores rated by different persons alongside a system-calculated weighted score.
 
-HTTP: GET
-URI: http://127.0.0.1:8080/endorsements/{userId}
-Body: N/A
+HTTP: GET,
+URI: http://127.0.0.1:8080/endorsements/{userId},
+Body: N/A,
 
 Sample Response JSON:
 

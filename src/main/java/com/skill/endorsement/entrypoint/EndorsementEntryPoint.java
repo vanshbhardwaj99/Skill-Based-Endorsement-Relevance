@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/endorsements")
@@ -35,7 +36,7 @@ public class EndorsementEntryPoint {
     @GetMapping(value="/{userId}")
     public ResponseEntity<String> getEndorsementById(@PathVariable String userId){
         try{
-            List<EndorsementResponse> response = endorsementService.getEndorsementsById(userId);
+            Map<String, List<EndorsementResponse>> response = endorsementService.getEndorsementsById(userId);
             return new ResponseEntity<>(ResponseComposer.createJSONResponse(response), HttpStatus.OK);
         }
         catch(Exception e){

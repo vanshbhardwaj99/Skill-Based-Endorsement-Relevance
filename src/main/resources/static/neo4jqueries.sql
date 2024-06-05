@@ -9,7 +9,7 @@ CREATE (:User {id: '6', name: 'Rahul', domain: 'Software Engineering', experienc
 
 --Create Skills
 CREATE (:Skill {id: '0', name: 'ROOT SKILL'});
-CREATE (:Skill {id: '1', name: 'Software Development'});
+CREATE (:Skill {id: '1', name: 'Software Engineering'});
 CREATE (:Skill {id: '2', name: 'Java'});
 CREATE (:Skill {id: '3', name: 'Spring Boot'});
 CREATE (:Skill {id: '4', name: 'ReactJS'});
@@ -74,22 +74,3 @@ CREATE (sales)-[:CHILD_SKILL {weight: 0.3}]->(communication)
 CREATE (communication)-[:CHILD_SKILL {weight: 0.2}]->(relationshipBuilding)
 CREATE (communication)-[:PARENT_SKILL {weight: 0.3}]->(sales)
 CREATE (relationshipBuilding)-[:PARENT_SKILL {weight: 0.2}]->(communication)
-
-
---Create Endorsements
---MATCH (r:User {userId: 'user1'}), (e:User {userId: 'user2'}), (s:Skill {skillId: 'skill1'})
---CREATE (r)-[:ENDORSES {score: 4, skill: 'Java'}]->(e);
---
---MATCH (r:User {userId: 'user2'}), (e:User {userId: 'user1'}), (s:Skill {skillId: 'skill2'})
---CREATE (r)-[:ENDORSES {score: 3, skill: 'Python'}]->(e);
---
---MATCH (r:User {userId: 'user3'}), (e:User {userId: 'user4'}), (s:Skill {skillId: 'skill1'})
---CREATE (r)-[:ENDORSES {score: 5, skill: 'Java'}]->(e);
---
---MATCH (r:User {userId: 'user4'}), (e:User {userId: 'user3'}), (s:Skill {skillId: 'skill4'})
---CREATE (r)-[:ENDORSES {score: 2, skill: 'Networking'}]->(e);
---
---MATCH (r:User {userId: 'user5'}), (e:User {userId: 'user1'}), (s:Skill {skillId: 'skill5'})
---CREATE (r)-[:ENDORSES {score: 4, skill: 'Project Management'}]->(e);
-
-
